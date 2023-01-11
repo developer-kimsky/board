@@ -1,0 +1,40 @@
+.board {
+  height: 90%;
+}
+
+.list {
+  width: 80%;
+  height: 100%;
+  margin: 20px auto;
+  padding: 10px 30px;
+  background-color: #fafafa;
+  color: black;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  padding: 15px;
+}
+
+.title {
+  width: 80%;
+}
+
+.title a {
+  text-decoration: none;
+  color: black;
+}
+
+.title a:hover {
+  color: red;
+}
+
+.author {
+  width: 10%;
+}
+
+.date {
+  width: 10%;
+}
