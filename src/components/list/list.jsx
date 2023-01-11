@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import styles from "./list.module.css";
 
@@ -23,11 +23,15 @@ const List = (props) => {
       date: "2023 - 01 - 12",
     },
   ];
+  const navigate = useNavigate();
+  const onCreate = () => {
+    navigate("/create", {});
+  };
 
   return (
     <div className={styles.board}>
       <div className={styles.buttons}>
-        <button>글쓰기</button>
+        <button onClick={onCreate}>글쓰기</button>
       </div>
       <ul className={styles.list}>
         {dummy.map((item, i) => {
