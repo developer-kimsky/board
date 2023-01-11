@@ -2,6 +2,12 @@
   height: 90%;
 }
 
+.buttons {
+  width: 80%;
+  margin: 20px auto;
+  text-align: end;
+}
+
 .list {
   width: 80%;
   height: 100%;

@@ -26,6 +26,9 @@ const List = (props) => {
 
   return (
     <div className={styles.board}>
+      <div className={styles.buttons}>
+        <button>글쓰기</button>
+      </div>
       <ul className={styles.list}>
         {dummy.map((item, i) => {
           return (

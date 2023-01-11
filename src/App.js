@@ -4,6 +4,7 @@ import Header from "./components/header/header";
 import Login from "./components/login/login";
 import List from "./components/list/list";
 import Detail from "./components/detail/detail";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/detail/:index" element={<Detail />} />
           {/* <Route path="/*" element={<NotFound />} /> */}
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
