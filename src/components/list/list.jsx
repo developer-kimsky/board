@@ -25,7 +25,7 @@ const List = (props) => {
   ];
   const navigate = useNavigate();
   const onCreate = () => {
-    navigate("/create", {});
+    navigate("/write", {});
   };
 
   return (
