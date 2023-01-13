@@ -7,16 +7,25 @@ import Detail from "./components/detail/detail";
 import Write from "./components/write/write";
 import Footer from "./components/footer/footer";
 
-function App({ authService }) {
+function App({ authService, boardRepository }) {
   return (
     <div className={styles.app}>
       <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<Login authService={authService} />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/detail/:index" element={<Detail />} />
-          <Route path="/write" element={<Write />} />
+          <Route
+            path="/list"
+            element={<List boardRepository={boardRepository} />}
+          />
+          <Route
+            path="/detail/:id"
+            element={<Detail boardRepository={boardRepository} />}
+          />
+          <Route
+            path="/write"
+            element={<Write boardRepository={boardRepository} />}
+          />
           {/* <Route path="/*" element={<NotFound />} /> */}
         </Routes>
         {/* <Footer /> */}

@@ -1,32 +1,28 @@
-import { Link, useNavigate } from "react-router-dom";
-import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import styles from "./list.module.css";
 
-const List = (props) => {
-  let dummy = [
-    {
-      title:
-        "글제목1글제목1글제목1글제목1글제목1글제목1글제목1글제목1글제목1글제목1",
-      author: "글쓴이1",
-      date: "2023 - 01 - 12",
-    },
-    {
-      title:
-        "글제목2글제목2글제목2글제목2글제목2글제목2글제목2글제목2글제목2글제목2글제목2",
-      author: "글쓴이2",
-      date: "2023 - 01 - 12",
-    },
-    {
-      title:
-        "글제목3글제목3글제목3글제목3글제목3글제목3글제목3글제목3글제목3글제목3",
-      author: "글쓴이3",
-      date: "2023 - 01 - 12",
-    },
-  ];
+const List = ({ boardRepository }) => {
   const navigate = useNavigate();
+  const navigateState = useLocation().state;
+  const [userId, setUserId] = useState(navigateState && navigateState.id);
+  const [boards, setBoards] = useState({});
+
   const onCreate = () => {
-    navigate("/write", {});
+    if (!userId) {
+      alert("로그인 후 글쓰기 가능합니다.");
+      navigate("/", {});
+      return;
+    }
+    navigate("/write", { state: { id: userId } });
   };
+
+  useEffect(() => {
+    const stopSync = boardRepository.syncBoards((boards) => {
+      setBoards(boards);
+    });
+    return () => stopSync();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -35,17 +31,15 @@ const List = (props) => {
           <button onClick={onCreate}>글쓰기</button>
         </div>
         <ul className={styles.list}>
-          {dummy.map((item, i) => {
-            return (
-              <li key={i} className={styles.item}>
-                <div className={styles.title}>
-                  <Link to={"../detail/" + i}>{item.title}</Link>
-                </div>
-                <div className={styles.author}>{item.author}</div>
-                <div className={styles.date}>{item.date}</div>
-              </li>
-            );
-          })}
+          {Object.keys(boards).map((key) => (
+            <li key={key} className={styles.item}>
+              <div className={styles.title}>
+                <Link to={"../detail/" + key}>{boards[key].title}</Link>
+              </div>
+              {/* <div className={styles.author}>{boards[key].author}</div> */}
+              <div className={styles.date}>{boards[key].date}</div>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
