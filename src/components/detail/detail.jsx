@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./detail.module.css";
 
 const Detail = ({ boardRepository }) => {
+  const navigate = useNavigate();
   const params = useParams();
   const boardId = params.id;
   const [board, setBoard] = useState({});
+
+  const gotoList = () => {
+    navigate("/list", {});
+  };
+
+  const onDelete = () => {
+    boardRepository.removeBoard(boardId);
+    navigate("/list", {});
+  };
 
   useEffect(() => {
     const stopSync = boardRepository.getBoards(boardId, (board) => {
@@ -19,7 +29,7 @@ const Detail = ({ boardRepository }) => {
       <div className={styles.board}>
         <div className={styles.buttons}>
           <button>수정</button>
-          <button>삭제</button>
+          <button onClick={onDelete}>삭제</button>
         </div>
         <div className={styles.detail}>
           <div className={styles.title}>{board.title}</div>
@@ -30,7 +40,7 @@ const Detail = ({ boardRepository }) => {
           <div className={styles.content}>{board.content}</div>
         </div>
         <div className={styles.list}>
-          <button>목록</button>
+          <button onClick={gotoList}>목록</button>
         </div>
       </div>
     </div>

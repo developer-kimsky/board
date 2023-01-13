@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useState, useRef } from "react";
 import styles from "./write.module.css";
 
@@ -8,6 +8,7 @@ const Write = ({ boardRepository }) => {
   const authorRef = useRef();
   const contentRef = useRef();
 
+  const navigate = useNavigate();
   const navigateState = useLocation().state;
   const [userId, setUserId] = useState(navigateState && navigateState.id);
 
@@ -21,7 +22,8 @@ const Write = ({ boardRepository }) => {
       date: Date.now(),
     };
     formRef.current.reset();
-    boardRepository.saveBoard(userId, board);
+    boardRepository.saveBoard(board);
+    navigate("/detail/" + board.id, {});
   };
 
   return (

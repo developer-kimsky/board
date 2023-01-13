@@ -23,8 +23,8 @@ class BoardRepository {
     firebaseDatabase.ref(`boards/${board.id}`).set(board);
   }
 
-  removeBoard(board) {
-    firebaseDatabase.ref(`boards/${board.id}`).remove();
+  removeBoard(boardId) {
+    firebaseDatabase.ref(`boards/${boardId}`).remove();
   }
 }
 

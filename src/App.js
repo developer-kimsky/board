@@ -6,12 +6,17 @@ import List from "./components/list/list";
 import Detail from "./components/detail/detail";
 import Write from "./components/write/write";
 import Footer from "./components/footer/footer";
+import { useCallback } from "react";
 
 function App({ authService, boardRepository }) {
+  const onLogout = useCallback(() => {
+    authService.logout();
+  }, [authService]);
+
   return (
     <div className={styles.app}>
       <BrowserRouter>
-        <Header />
+        <Header onLogout={onLogout} />
         <Routes>
           <Route path="/" element={<Login authService={authService} />} />
           <Route
