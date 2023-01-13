@@ -11,19 +11,21 @@ const Login = ({ authService }) => {
   };
 
   return (
-    <div className={styles.login}>
-      <ul className={styles.list}>
-        <li className={styles.item}>
-          <button className={styles.button} onClick={onLogin}>
-            Google
-          </button>
-        </li>
-        <li className={styles.item}>
-          <button className={styles.button} onClick={onLogin}>
-            Github
-          </button>
-        </li>
-      </ul>
+    <div className={styles.container}>
+      <div className={styles.login}>
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <button className={styles.button} onClick={onLogin}>
+              Google
+            </button>
+          </li>
+          <li className={styles.item}>
+            <button className={styles.button} onClick={onLogin}>
+              Github
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

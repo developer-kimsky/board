@@ -19,7 +19,7 @@ function App({ authService }) {
           <Route path="/write" element={<Write />} />
           {/* <Route path="/*" element={<NotFound />} /> */}
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );

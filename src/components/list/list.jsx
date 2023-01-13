@@ -29,23 +29,25 @@ const List = (props) => {
   };
 
   return (
-    <div className={styles.board}>
-      <div className={styles.buttons}>
-        <button onClick={onCreate}>글쓰기</button>
+    <div className={styles.container}>
+      <div className={styles.board}>
+        <div className={styles.buttons}>
+          <button onClick={onCreate}>글쓰기</button>
+        </div>
+        <ul className={styles.list}>
+          {dummy.map((item, i) => {
+            return (
+              <li key={i} className={styles.item}>
+                <div className={styles.title}>
+                  <Link to={"../detail/" + i}>{item.title}</Link>
+                </div>
+                <div className={styles.author}>{item.author}</div>
+                <div className={styles.date}>{item.date}</div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-      <ul className={styles.list}>
-        {dummy.map((item, i) => {
-          return (
-            <li key={i} className={styles.item}>
-              <div className={styles.title}>
-                <Link to={"../detail/" + i}>{item.title}</Link>
-              </div>
-              <div className={styles.author}>{item.author}</div>
-              <div className={styles.date}>{item.date}</div>
-            </li>
-          );
-        })}
-      </ul>
     </div>
   );
 };
