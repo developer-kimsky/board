@@ -1,11 +1,10 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import styles from "./list.module.css";
 
 const List = ({ boardRepository }) => {
   const navigate = useNavigate();
-  const navigateState = useLocation().state;
-  const [userId, setUserId] = useState(navigateState && navigateState.id);
+  const [userId, setUserId] = useState();
   const [boards, setBoards] = useState({});
 
   const onCreate = () => {
@@ -14,10 +13,16 @@ const List = ({ boardRepository }) => {
       navigate("/", {});
       return;
     }
-    navigate("/write", { state: { id: userId } });
+    navigate("/write", {});
+  };
+
+  const toDetail = (boardId) => {
+    navigate("/detail/" + boardId, {});
   };
 
   useEffect(() => {
+    if (sessionStorage.getItem("id")) setUserId(sessionStorage.getItem("id"));
+
     const stopSync = boardRepository.syncBoards((boards) => {
       setBoards(boards);
     });
@@ -33,8 +38,13 @@ const List = ({ boardRepository }) => {
         <ul className={styles.list}>
           {Object.keys(boards).map((key) => (
             <li key={key} className={styles.item}>
-              <div className={styles.title}>
-                <Link to={"../detail/" + key}>{boards[key].title}</Link>
+              <div
+                className={styles.title}
+                onClick={(e) => {
+                  toDetail(key);
+                }}
+              >
+                {boards[key].title}
               </div>
               {/* <div className={styles.author}>{boards[key].author}</div> */}
               <div className={styles.date}>{boards[key].date}</div>

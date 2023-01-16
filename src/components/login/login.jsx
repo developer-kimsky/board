@@ -5,7 +5,8 @@ import styles from "./login.module.css";
 const Login = ({ authService }) => {
   const navigate = useNavigate();
   const gotoList = (userId) => {
-    navigate("/list", { state: { id: userId } });
+    sessionStorage.setItem("id", userId);
+    navigate("/list", {});
   };
 
   const onLogin = (e) => {

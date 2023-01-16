@@ -8,7 +8,9 @@ const Header = ({ onLogout }) => {
       <h1>
         <NavLink to="/list">Board </NavLink>
       </h1>
-      {/* {onLogout && <button onClick={onLogout}>Logout</button>} */}
+      {sessionStorage.getItem("id") && (
+        <button onClick={onLogout}>Logout</button>
+      )}
     </div>
   );
 };

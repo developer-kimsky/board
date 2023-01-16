@@ -24,7 +24,7 @@ function App({ authService, boardRepository }) {
             element={<List boardRepository={boardRepository} />}
           />
           <Route
-            path="/detail/:id"
+            path="/detail/:boardId"
             element={<Detail boardRepository={boardRepository} />}
           />
           <Route

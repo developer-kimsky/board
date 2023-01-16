@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./write.module.css";
 
 const Write = ({ boardRepository }) => {
@@ -9,8 +9,8 @@ const Write = ({ boardRepository }) => {
   const contentRef = useRef();
 
   const navigate = useNavigate();
-  const navigateState = useLocation().state;
-  const [userId, setUserId] = useState(navigateState && navigateState.id);
+
+  const [userId, setUserId] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -26,13 +26,23 @@ const Write = ({ boardRepository }) => {
     navigate("/detail/" + board.id, {});
   };
 
+  useEffect(() => {
+    if (sessionStorage.getItem("id")) setUserId(sessionStorage.getItem("id"));
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.board}>
         <div className={styles.write}>
           <form ref={formRef}>
             <input type="text" ref={titleRef} name="title" placeholder="제목" />
-            <input type="text" ref={authorRef} name="author" value={userId} />
+            <input
+              type="text"
+              ref={authorRef}
+              name="author"
+              value={userId}
+              readOnly
+            />
             <textarea
               ref={contentRef}
               name="content"
