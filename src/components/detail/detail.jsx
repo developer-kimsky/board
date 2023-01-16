@@ -10,16 +10,16 @@ const Detail = ({ boardRepository }) => {
   const [userId, setUserId] = useState();
 
   const gotoList = () => {
-    navigate("/list", {});
+    navigate("/list");
   };
 
   const onEdit = () => {
-    navigate(`/write/${boardId}`, {});
+    navigate(`/write/${boardId}`);
   };
 
   const onDelete = () => {
     boardRepository.removeBoard(boardId);
-    navigate("/list", {});
+    navigate("/list");
   };
 
   useEffect(() => {

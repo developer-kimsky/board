@@ -6,7 +6,7 @@ const Login = ({ authService }) => {
   const navigate = useNavigate();
   const gotoList = (userId) => {
     sessionStorage.setItem("id", userId);
-    navigate("/list", {});
+    navigate("/list");
   };
 
   const onLogin = (e) => {

@@ -10,14 +10,14 @@ const List = ({ authService, boardRepository }) => {
   const onCreate = () => {
     if (!userId) {
       alert("로그인 후 글쓰기 가능합니다.");
-      navigate("/", {});
+      navigate("/");
       return;
     }
-    navigate("/write", {});
+    navigate("/write");
   };
 
   const toDetail = (boardId) => {
-    navigate(`/detail/${boardId}`, {});
+    navigate(`/detail/${boardId}`);
   };
 
   useEffect(() => {

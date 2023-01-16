@@ -31,14 +31,14 @@ const Write = ({ boardRepository }) => {
     };
     formRef.current.reset();
     boardRepository.saveBoard(boardData);
-    navigate(`/detail/${boardData.id}`, {});
+    navigate(`/detail/${boardData.id}`);
   };
 
   useEffect(() => {
     if (sessionStorage.getItem("id")) {
       setUserId(sessionStorage.getItem("id"));
     } else {
-      navigate("/list", {});
+      navigate("/list");
     }
 
     if (boardId) {
