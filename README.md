@@ -1,6 +1,6 @@
-<h1>Boardr</h1>
+<h1>Board</h1>
 <h3>Link</h3>
-<p></p>
+<p>https://developer-kimsky.github.io/board/</p>
 
 <h3>Tech Stack</h3>
 <div style=="display:flex;">
@@ -12,4 +12,4 @@
 </div>
 
 <h3>Description</h3>
-<p></p>
+<p>간단한 익명 게시판. 구글과 깃허브로 로그인할 수 있고 게시글 CRUD 가능!</p>
