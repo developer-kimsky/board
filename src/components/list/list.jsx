@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import styles from "./list.module.css";
 
-const List = ({ boardRepository }) => {
+const List = ({ authService, boardRepository }) => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState();
   const [boards, setBoards] = useState({});
@@ -17,17 +17,18 @@ const List = ({ boardRepository }) => {
   };
 
   const toDetail = (boardId) => {
-    navigate("/detail/" + boardId, {});
+    navigate(`/detail/${boardId}`, {});
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem("id")) setUserId(sessionStorage.getItem("id"));
-
+    authService.onAuthChange(() => {
+      if (sessionStorage.getItem("id")) setUserId(sessionStorage.getItem("id"));
+    });
     const stopSync = boardRepository.syncBoards((boards) => {
       setBoards(boards);
     });
     return () => stopSync();
-  }, []);
+  }, [authService, userId, navigate]);
 
   return (
     <div className={styles.container}>

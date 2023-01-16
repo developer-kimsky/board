@@ -7,8 +7,8 @@ class AuthService {
   }
 
   logout() {
-    firebaseAuth.signOut();
     sessionStorage.removeItem("id");
+    firebaseAuth.signOut();
   }
 
   onAuthChange(onUserChanged) {

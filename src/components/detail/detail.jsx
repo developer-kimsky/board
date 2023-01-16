@@ -13,6 +13,10 @@ const Detail = ({ boardRepository }) => {
     navigate("/list", {});
   };
 
+  const onEdit = () => {
+    navigate(`/write/${boardId}`, {});
+  };
+
   const onDelete = () => {
     boardRepository.removeBoard(boardId);
     navigate("/list", {});
@@ -32,7 +36,7 @@ const Detail = ({ boardRepository }) => {
       <div className={styles.board}>
         {board.author === userId && (
           <div className={styles.buttons}>
-            <button>수정</button>
+            <button onClick={onEdit}>수정</button>
             <button onClick={onDelete}>삭제</button>
           </div>
         )}

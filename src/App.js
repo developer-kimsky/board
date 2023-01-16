@@ -11,6 +11,7 @@ import { useCallback } from "react";
 function App({ authService, boardRepository }) {
   const onLogout = useCallback(() => {
     authService.logout();
+    window.location.reload();
   }, [authService]);
 
   return (
@@ -21,7 +22,12 @@ function App({ authService, boardRepository }) {
           <Route path="/" element={<Login authService={authService} />} />
           <Route
             path="/list"
-            element={<List boardRepository={boardRepository} />}
+            element={
+              <List
+                authService={authService}
+                boardRepository={boardRepository}
+              />
+            }
           />
           <Route
             path="/detail/:boardId"
@@ -29,6 +35,10 @@ function App({ authService, boardRepository }) {
           />
           <Route
             path="/write"
+            element={<Write boardRepository={boardRepository} />}
+          />
+          <Route
+            path="/write/:boardId"
             element={<Write boardRepository={boardRepository} />}
           />
           {/* <Route path="/*" element={<NotFound />} /> */}

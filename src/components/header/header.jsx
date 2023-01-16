@@ -1,16 +1,21 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
 
 const Header = ({ onLogout }) => {
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("id")) setUserId(sessionStorage.getItem("id"));
+  }, [navigate]);
+
   return (
     <div className={styles.header}>
       <h1>
-        <NavLink to="/list">Board </NavLink>
+        <NavLink to="/list">Board</NavLink>
       </h1>
-      {sessionStorage.getItem("id") && (
-        <button onClick={onLogout}>Logout</button>
-      )}
+      {userId && <button onClick={onLogout}>Logout</button>}
     </div>
   );
 };
