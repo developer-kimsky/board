@@ -17,23 +17,27 @@ const Write = ({ boardRepository }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const board = {
+    const offset = 1000 * 60 * 60 * 9;
+    const koreaNow = new Date(new Date().getTime() + offset);
+
+    const boardData = {
       id: boardId || Date.now(),
       title: titleRef.current.value || "",
       content: contentRef.current.value || "",
       author: authorRef.current.value || "",
-      date: boardId && Date.now(),
+      date: boardId
+        ? board.date
+        : koreaNow.toISOString().replace("T", " ").split(".")[0],
     };
     formRef.current.reset();
-    boardRepository.saveBoard(board);
-    navigate(`/detail/${board.id}`, {});
+    boardRepository.saveBoard(boardData);
+    navigate(`/detail/${boardData.id}`, {});
   };
 
   useEffect(() => {
     if (sessionStorage.getItem("id")) {
       setUserId(sessionStorage.getItem("id"));
     } else {
-      alert("로그인 후 글쓰기 가능합니다.ㅇㅇ");
       navigate("/list", {});
     }
 
@@ -57,13 +61,7 @@ const Write = ({ boardRepository }) => {
               placeholder="제목"
               defaultValue={board.title || ""}
             />
-            <input
-              type="text"
-              ref={authorRef}
-              name="author"
-              value={userId}
-              readOnly
-            />
+            <input type="hidden" ref={authorRef} name="author" value={userId} />
             <textarea
               ref={contentRef}
               name="content"
