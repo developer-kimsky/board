@@ -11,11 +11,13 @@ const Header = ({ onLogout }) => {
   }, [navigate]);
 
   return (
-    <div className={styles.header}>
-      <h1>
-        <NavLink to="/list">Board</NavLink>
-      </h1>
-      {userId && <button onClick={onLogout}>Logout</button>}
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>
+          <NavLink to="/list">Board</NavLink>
+        </h1>
+        {userId && <button onClick={onLogout}>Logout</button>}
+      </div>
     </div>
   );
 };
